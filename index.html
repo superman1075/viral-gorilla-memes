@@ -4,44 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viral AI Gorilla Meme Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Trebuchet MS', Verdana, sans-serif;
+            color: #fff;
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80'); /* Gorilla background */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        header, footer {
+            background: rgba(30, 30, 30, 0.85);
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            background: rgba(20, 20, 20, 0.8);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 0 32px 8px #222;
+        }
+        section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(40, 40, 40, 0.85);
+            border-radius: 12px;
+        }
+        .toggle-btn {
+            background: #8f5d24;
+            color: #fff;
+            border: none;
+            padding: 0.6em 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 1em;
+            font-size: 1em;
+            box-shadow: 0 2px 6px #0005;
+        }
+        .toggle-btn:hover {
+            background: #b58948;
+        }
+        .hidden {
+            display: none;
+        }
+        .gorilla-emoji {
+            font-size: 2em;
+            margin-right: 0.5em;
+        }
+        .meme-image {
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px #0006;
+        }
+        .meme-gallery-img {
+            width: 150px;
+            margin: 8px;
+            border-radius: 8px;
+            vertical-align: middle;
+        }
+        .meme-text {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.3em;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px #222;
+            pointer-events: none;
+        }
+        .meme-container {
+            position: relative;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to the Viral AI Gorilla Meme Gallery Powered by KongKoin</h1>
+        <span class="gorilla-emoji">🦍</span>
+        <h1>Viral AI Gorilla Meme Gallery Powered by KongKoin</h1>
     </header>
     <main>
-        <section id="meme-generator">
+        <button class="toggle-btn" onclick="toggleSection('meme-generator')">Meme Generator</button>
+        <section id="meme-generator" class="hidden">
             <h2>Meme Generator</h2>
-            <p>Create your own memes!</p>
-            <!-- Include meme generator functionality here -->
+            <form onsubmit="generateMeme(event)">
+                <input type="text" id="memeText" placeholder="Enter your meme text" style="padding:0.5em;width:70%;border-radius:6px;">
+                <button type="submit" class="toggle-btn">Generate Meme</button>
+            </form>
+            <div id="memeResult" style="margin-top:20px;"></div>
         </section>
 
-        <section id="mini-game">
+        <button class="toggle-btn" onclick="toggleSection('mini-game')">Mini Game</button>
+        <section id="mini-game" class="hidden">
             <h2>Mini Game</h2>
-            <p>Enjoy a fun mini-game!</p>
-            <!-- Include mini-game functionality here -->
+            <p>Click the gorilla to score points. Try to get the highest score!</p>
+            <img src="https://openmoji.org/data/color/svg/1F98D.svg" alt="Gorilla" id="gorillaGameImg" style="width:120px;cursor:pointer;" onclick="miniGameScore()">
+            <div id="game-score" style="font-size:1.2em;margin-top:8px;">Score: 0</div>
+            <button class="toggle-btn" onclick="resetMiniGame()">Reset Game</button>
         </section>
 
-        <section id="kongkoin-stats">
+        <button class="toggle-btn" onclick="toggleSection('kongkoin-stats')">KongKoin Stats</button>
+        <section id="kongkoin-stats" class="hidden">
             <h2>KongKoin Stats</h2>
-            <p>Latest stats on KongKoin.</p>
-            <!-- Include KongKoin stats here -->
+            <div>
+                <strong>Current Price:</strong> <span id="kongPrice">$0.00</span><br>
+                <strong>Market Cap:</strong> <span id="kongMarket">$0</span>
+            </div>
+            <button class="toggle-btn" onclick="refreshKongStats()">Refresh Stats</button>
         </section>
 
-        <section id="meme-gallery">
+        <button class="toggle-btn" onclick="toggleSection('meme-gallery')">Meme Gallery</button>
+        <section id="meme-gallery" class="hidden">
             <h2>Meme Gallery</h2>
-            <p>Check out our meme collection!</p>
-            <!-- Include meme gallery functionality here -->
+            <div>
+                <div class="meme-container" style="margin-bottom:12px;">
+                    <img src="https://img.freepik.com/free-photo/gorilla-smoking-pipe_1150-11155.jpg?w=900&t=st=1691839655~exp=1691839955~hmac=8e1b5ddfb890e5a125d905b3f7c9b8e7e3c6955d8b053d94b2d5e5a854ab2d6c" class="meme-gallery-img" alt="Gorilla Meme">
+                    <div class="meme-text">Pot to the moon 🌿🚀</div>
+                </div>
+                <div class="meme-container" style="margin-bottom:12px;">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" class="meme-gallery-img" alt="Gorilla Meme">
+                    <div class="meme-text">When KongKoin hits $1 💸</div>
+                </div>
+            </div>
         </section>
 
-        <section id="instructions">
+        <button class="toggle-btn" onclick="toggleSection('instructions')">Instructions</button>
+        <section id="instructions" class="hidden">
             <h2>Instructions</h2>
-            <p>How to use the gallery and other features.</p>
-            <!-- Include instructions here -->
+            <ul>
+                <li>Click any section button to show/hide features.</li>
+                <li>Use the Meme Generator to create your own gorilla memes.</li>
+                <li>Play the mini-game and try to beat your score!</li>
+                <li>Check KongKoin stats and refresh for random numbers.</li>
+                <li>Browse the meme gallery for inspiration.</li>
+            </ul>
         </section>
     </main>
     <footer>
         <p>&copy; 2023 Viral AI Gorilla Meme Gallery</p>
     </footer>
+    <script>
+        // Section toggling
+        function toggleSection(sectionId) {
+            document.querySelectorAll('section').forEach(sec => {
+                if (sec.id === sectionId) {
+                    sec.classList.toggle('hidden');
+                } else {
+                    sec.classList.add('hidden');
+                }
+            });
+        }
+
+        // Meme generator
+        function generateMeme(event) {
+            event.preventDefault();
+            let text = document.getElementById('memeText').value.trim();
+            if (!text) return;
+            let memeHTML = `
+                <div class="meme-container">
+                    <img src="https://img.freepik.com/free-photo/gorilla-smoking-pipe_1150-11155.jpg?w=900&t=st=1691839655~exp=1691839955~hmac=8e1b5ddfb890e5a125d905b3f7c9b8e7e3c6955d8b053d94b2d5e5a854ab2d6c" class="meme-image" alt="Gorilla Meme">
+                    <div class="meme-text" style="top:18px;">${text}</div>
+                </div>`;
+            document.getElementById('memeResult').innerHTML = memeHTML;
+        }
+
+        // Mini game logic
+        let score = 0;
+        function miniGameScore() {
+            score += Math.floor(Math.random() * 10) + 1;
+            document.getElementById('game-score').innerText = "Score: " + score;
+        }
+        function resetMiniGame() {
+            score = 0;
+            document.getElementById('game-score').innerText = "Score: " + score;
+        }
+
+        // KongKoin stats simulation
+        function refreshKongStats() {
+            document.getElementById('kongPrice').textContent = "$" + (Math.random()*2+0.1).toFixed(4);
+            document.getElementById('kongMarket').textContent = "$" + (Math.floor(Math.random()*1000000)+100000) + "";
+        }
+        // Initialize stats
+        refreshKongStats();
+    </script>
 </body>
 </html>
