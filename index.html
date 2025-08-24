@@ -3,68 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viral AI Gorilla Meme Gallery</title>
+    <title>KongKoin Meme Gallery & Game</title>
     <style>
         body {
-            margin: 0;
             font-family: 'Trebuchet MS', Verdana, sans-serif;
             color: #fff;
-            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80'); /* Gorilla background */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: url('https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            margin: 0;
             min-height: 100vh;
         }
         header, footer {
-            background: rgba(30, 30, 30, 0.85);
+            background: rgba(20, 20, 20, 0.95);
             padding: 1rem;
             text-align: center;
+            box-shadow: 0 2px 12px #111a;
+        }
+        .kong-ad {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 30, 30, 0.94);
+            border-radius: 20px;
+            box-shadow: 0 6px 32px #000e, 0 0 0 3px #fdc20077;
+            margin: 40px auto 32px auto;
+            padding: 1.5em 2em;
+            max-width: 700px;
+        }
+        .kong-gorilla-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 28px #000a, 0 0 18px 2px #fff9;
+            margin-right: 2em;
+            background: #222;
+            border: 2px solid #fdc200;
+            position: relative;
+        }
+        .kong-gorilla-img::after {
+            content: "";
+            position: absolute;
+            bottom: 20px;
+            left: 92px;
+            width: 30px;
+            height: 12px;
+            background: linear-gradient(90deg, #a0522d 60%, #fff 80%);
+            border-radius: 5px;
+            box-shadow: 0 0 10px 2px #fff6 inset, 0 0 8px 1px #f00;
+            transform: rotate(-18deg);
+            z-index: 2;
+        }
+        .kong-ad-content {
+            font-size: 2.3em;
+            font-family: Impact, 'Trebuchet MS', Verdana, sans-serif;
+            color: #fdc200;
+            text-shadow: 0 2px 8px #000, 0 0 12px #fff7;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.2em;
+        }
+        .kong-ad-content small {
+            color: #fff;
+            font-size: 0.6em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 6px #000d;
+            margin-top: 0.3em;
+        }
+        .ad-moon {
+            font-size: 1.8em;
+            margin-left: 0.2em;
+            vertical-align: middle;
+            filter: drop-shadow(0 0 8px #ffe97e) drop-shadow(0 0 4px #fdc200);
         }
         main {
-            background: rgba(20, 20, 20, 0.8);
+            background: rgba(30, 30, 30, 0.88);
             margin: 2rem auto;
             padding: 2rem;
-            max-width: 800px;
-            border-radius: 20px;
-            box-shadow: 0 0 32px 8px #222;
+            max-width: 830px;
+            border-radius: 28px;
+            box-shadow: 0 0 32px 8px #222c;
         }
         section {
             margin-bottom: 2rem;
-            padding: 1rem;
-            background: rgba(40, 40, 40, 0.85);
-            border-radius: 12px;
+            padding: 1.4em 1em;
+            background: rgba(40, 40, 40, 0.95);
+            border-radius: 14px;
+            box-shadow: 0 2px 16px #1114;
         }
-        .toggle-btn {
-            background: #8f5d24;
-            color: #fff;
+        .banana-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, #ffe354 0%, #ffc107 80%, #fffbe3 100%);
+            color: #6c3c00;
             border: none;
-            padding: 0.6em 1.2em;
-            border-radius: 8px;
+            padding: 0.7em 1.4em 0.7em 1.2em;
+            border-radius: 30px 45px 25px 40px/30px 35px 25px 40px;
             cursor: pointer;
             margin-bottom: 1em;
-            font-size: 1em;
-            box-shadow: 0 2px 6px #0005;
+            font-size: 1.15em;
+            font-weight: bold;
+            box-shadow: 0 2px 7px #ffec8a;
+            font-family: inherit;
+            transition: transform 0.14s;
         }
-        .toggle-btn:hover {
-            background: #b58948;
+        .banana-btn:hover {
+            background: linear-gradient(90deg, #ffe354 10%, #ffd700 90%);
+            transform: scale(1.06) rotate(-2deg);
+            box-shadow: 0 3px 12px #ffe27e;
+        }
+        .banana-icon {
+            font-size: 1.7em;
         }
         .hidden {
             display: none;
-        }
-        .gorilla-emoji {
-            font-size: 2em;
-            margin-right: 0.5em;
-        }
-        .meme-image {
-            width: 250px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px #0006;
         }
         .meme-gallery-img {
             width: 150px;
             margin: 8px;
             border-radius: 8px;
             vertical-align: middle;
+            box-shadow: 0 0 10px #3336;
         }
         .meme-text {
             position: absolute;
@@ -83,72 +145,93 @@
             position: relative;
             display: inline-block;
         }
+        #gameCanvas {
+            background: rgba(0,0,0,0.86);
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #fff;
+            border-radius: 12px;
+        }
+        #miniGameInfo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        #miniGameControls {
+            text-align: center;
+            font-size: 1em;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        #instructions ul {
+            padding-left: 1.2em;
+        }
+        #instructions li {
+            margin-bottom: 0.5em;
+        }
     </style>
 </head>
 <body>
     <header>
-        <span class="gorilla-emoji">🦍</span>
-        <h1>Viral AI Gorilla Meme Gallery Powered by KongKoin</h1>
+        <h1 style="margin-top:1.2em;font-family:Impact,'Trebuchet MS',Verdana,sans-serif;font-size:2.4em;text-shadow:0 2px 12px #000,0 0 18px #fdc200;">
+            KongKoin Meme Gallery & Game
+        </h1>
     </header>
+    <!-- Gorilla Ad Section -->
+    <div class="kong-ad">
+        <img src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=600&q=80" alt="Hyper Realistic Gorilla" class="kong-gorilla-img">
+        <div class="kong-ad-content">
+            This shits going to the moon, bro! <span class="ad-moon">🌕🚀</span>
+            <small>(KongKoin: the meme coin for true gorillas)</small>
+        </div>
+    </div>
     <main>
-        <button class="toggle-btn" onclick="toggleSection('meme-generator')">Meme Generator</button>
-        <section id="meme-generator" class="hidden">
-            <h2>Meme Generator</h2>
-            <form onsubmit="generateMeme(event)">
-                <input type="text" id="memeText" placeholder="Enter your meme text" style="padding:0.5em;width:70%;border-radius:6px;">
-                <button type="submit" class="toggle-btn">Generate Meme</button>
-            </form>
-            <div id="memeResult" style="margin-top:20px;"></div>
-        </section>
-
-        <button class="toggle-btn" onclick="toggleSection('mini-game')">Mini Game</button>
+        <button class="banana-btn" onclick="toggleSection('mini-game')">
+            <span class="banana-icon">🍌</span> Play Mini Game
+        </button>
         <section id="mini-game" class="hidden">
-            <h2>Mini Game</h2>
-            <p>Click the gorilla to score points. Try to get the highest score!</p>
-            <img src="https://openmoji.org/data/color/svg/1F98D.svg" alt="Gorilla" id="gorillaGameImg" style="width:120px;cursor:pointer;" onclick="miniGameScore()">
-            <div id="game-score" style="font-size:1.2em;margin-top:8px;">Score: 0</div>
-            <button class="toggle-btn" onclick="resetMiniGame()">Reset Game</button>
+            <h2>KongKoin Gorilla Game: Dodge Bananas, Collect Moons!</h2>
+            <div id="miniGameInfo"></div>
+            <div id="miniGameControls">Use ◀️ and ▶️ arrow keys to move the gorilla. Dodge bananas, collect moons to level up!</div>
+            <canvas id="gameCanvas" width="400" height="500"></canvas>
+            <button class="banana-btn" onclick="startMiniGame()"><span class="banana-icon">🍌</span> Start/Restart Game</button>
         </section>
 
-        <button class="toggle-btn" onclick="toggleSection('kongkoin-stats')">KongKoin Stats</button>
-        <section id="kongkoin-stats" class="hidden">
-            <h2>KongKoin Stats</h2>
-            <div>
-                <strong>Current Price:</strong> <span id="kongPrice">$0.00</span><br>
-                <strong>Market Cap:</strong> <span id="kongMarket">$0</span>
-            </div>
-            <button class="toggle-btn" onclick="refreshKongStats()">Refresh Stats</button>
-        </section>
-
-        <button class="toggle-btn" onclick="toggleSection('meme-gallery')">Meme Gallery</button>
+        <button class="banana-btn" onclick="toggleSection('meme-gallery')">
+            <span class="banana-icon">🍌</span> Meme Gallery
+        </button>
         <section id="meme-gallery" class="hidden">
-            <h2>Meme Gallery</h2>
+            <h2>KongKoin Meme Gallery</h2>
             <div>
                 <div class="meme-container" style="margin-bottom:12px;">
-                    <img src="https://img.freepik.com/free-photo/gorilla-smoking-pipe_1150-11155.jpg?w=900&t=st=1691839655~exp=1691839955~hmac=8e1b5ddfb890e5a125d905b3f7c9b8e7e3c6955d8b053d94b2d5e5a854ab2d6c" class="meme-gallery-img" alt="Gorilla Meme">
-                    <div class="meme-text">Pot to the moon 🌿🚀</div>
+                    <img src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=600&q=80" class="meme-gallery-img" alt="Hyper Realistic Gorilla">
+                    <div class="meme-text">This shits going to the moon, bro! 🌕🚀</div>
                 </div>
                 <div class="meme-container" style="margin-bottom:12px;">
                     <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" class="meme-gallery-img" alt="Gorilla Meme">
                     <div class="meme-text">When KongKoin hits $1 💸</div>
                 </div>
+                <div class="meme-container" style="margin-bottom:12px;">
+                    <img src="https://img.freepik.com/free-photo/gorilla-smoking-pipe_1150-11155.jpg?w=900&t=st=1691839655~exp=1691839955~hmac=8e1b5ddfb890e5a125d905b3f7c9b8e7e3c6955d8b053d94b2d5e5a854ab2d6c" class="meme-gallery-img" alt="Gorilla Meme">
+                    <div class="meme-text">KongKoin: Only for true meme addicts</div>
+                </div>
             </div>
         </section>
 
-        <button class="toggle-btn" onclick="toggleSection('instructions')">Instructions</button>
+        <button class="banana-btn" onclick="toggleSection('instructions')">
+            <span class="banana-icon">🍌</span> How to Play
+        </button>
         <section id="instructions" class="hidden">
             <h2>Instructions</h2>
             <ul>
                 <li>Click any section button to show/hide features.</li>
-                <li>Use the Meme Generator to create your own gorilla memes.</li>
                 <li>Play the mini-game and try to beat your score!</li>
-                <li>Check KongKoin stats and refresh for random numbers.</li>
-                <li>Browse the meme gallery for inspiration.</li>
+                <li>Dodge bananas and collect moons to level up. Every 5 moons = faster bananas!</li>
+                <li>Browse the meme gallery for KongKoin inspiration.</li>
             </ul>
         </section>
     </main>
     <footer>
-        <p>&copy; 2023 Viral AI Gorilla Meme Gallery</p>
+        <p>&copy; 2025 KongKoin Meme Gallery & Game</p>
     </footer>
     <script>
         // Section toggling
@@ -160,39 +243,128 @@
                     sec.classList.add('hidden');
                 }
             });
+            if(sectionId === 'mini-game') updateMiniGameInfo();
         }
 
-        // Meme generator
-        function generateMeme(event) {
-            event.preventDefault();
-            let text = document.getElementById('memeText').value.trim();
-            if (!text) return;
-            let memeHTML = `
-                <div class="meme-container">
-                    <img src="https://img.freepik.com/free-photo/gorilla-smoking-pipe_1150-11155.jpg?w=900&t=st=1691839655~exp=1691839955~hmac=8e1b5ddfb890e5a125d905b3f7c9b8e7e3c6955d8b053d94b2d5e5a854ab2d6c" class="meme-image" alt="Gorilla Meme">
-                    <div class="meme-text" style="top:18px;">${text}</div>
-                </div>`;
-            document.getElementById('memeResult').innerHTML = memeHTML;
+        // --- MINI GAME CODE ---
+        let game, ctx, gorillaImg, bananaImg, moonImg;
+        let gameRunning = false;
+        let gameLevel = 1;
+        let gameMoons = 0;
+        let gameOver = false;
+
+        function startMiniGame() {
+            gameLevel = 1;
+            gameMoons = 0;
+            gameOver = false;
+            updateMiniGameInfo();
+            document.getElementById('gameCanvas').focus();
+            game = {
+                w: 400,
+                h: 500,
+                gorilla: { x: 180, y: 440, w: 40, h: 40, vx: 0 },
+                bananas: [],
+                moons: [],
+                nextBanana: 0,
+                nextMoon: 0,
+                bananaSpeed: 2
+            };
+            ctx = document.getElementById('gameCanvas').getContext('2d');
+            gorillaImg = new Image();
+            gorillaImg.src = "https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=600&q=80";
+            bananaImg = new Image();
+            bananaImg.src = "https://openmoji.org/data/color/svg/1F34C.svg";
+            moonImg = new Image();
+            moonImg.src = "https://openmoji.org/data/color/svg/1F311.svg";
+            window.addEventListener("keydown", gorillaControl);
+            window.addEventListener("keyup", gorillaStop);
+            setTimeout(gameLoop, 100);
         }
 
-        // Mini game logic
-        let score = 0;
-        function miniGameScore() {
-            score += Math.floor(Math.random() * 10) + 1;
-            document.getElementById('game-score').innerText = "Score: " + score;
-        }
-        function resetMiniGame() {
-            score = 0;
-            document.getElementById('game-score').innerText = "Score: " + score;
+        function updateMiniGameInfo() {
+            document.getElementById('miniGameInfo').innerHTML = gameOver ?
+                `<span style="color:red;">Game Over! Moons collected: ${gameMoons}. Level reached: ${gameLevel}</span>` :
+                `Level: <b>${gameLevel}</b> | Moons: <b>${gameMoons}</b>`;
         }
 
-        // KongKoin stats simulation
-        function refreshKongStats() {
-            document.getElementById('kongPrice').textContent = "$" + (Math.random()*2+0.1).toFixed(4);
-            document.getElementById('kongMarket').textContent = "$" + (Math.floor(Math.random()*1000000)+100000) + "";
+        function gameLoop() {
+            if(gameOver || !game) return;
+            game.gorilla.x += game.gorilla.vx;
+            if(game.gorilla.x < 0) game.gorilla.x = 0;
+            if(game.gorilla.x > game.w-game.gorilla.w) game.gorilla.x = game.w-game.gorilla.w;
+
+            // Bananas
+            if(game.nextBanana-- <= 0) {
+                game.bananas.push({x: Math.random()*(game.w-32), y: -32, w:32, h:32, speed: game.bananaSpeed});
+                game.nextBanana = Math.max(20, 60 - gameLevel*5);
+            }
+            game.bananas.forEach(banana => {
+                banana.y += banana.speed;
+            });
+            game.bananas = game.bananas.filter(banana => banana.y < game.h);
+
+            // Moons
+            if(game.nextMoon-- <= 0) {
+                game.moons.push({x: Math.random()*(game.w-28), y: -28, w:28, h:28, speed: game.bananaSpeed-0.7});
+                game.nextMoon = Math.max(50, 110 - gameLevel*8);
+            }
+            game.moons.forEach(moon => {
+                moon.y += moon.speed;
+            });
+            game.moons = game.moons.filter(moon => moon.y < game.h);
+
+            // Collision with banana
+            for(let banana of game.bananas) {
+                if(collide(game.gorilla, banana)) {
+                    gameOver = true;
+                    updateMiniGameInfo();
+                    window.removeEventListener("keydown", gorillaControl);
+                    window.removeEventListener("keyup", gorillaStop);
+                    return;
+                }
+            }
+            // Collision with moon
+            for(let moon of game.moons) {
+                if(collide(game.gorilla, moon)) {
+                    gameMoons += 1;
+                    game.moons = game.moons.filter(m => m !== moon);
+                    if(gameMoons % 5 === 0) {
+                        gameLevel += 1;
+                        game.bananaSpeed += 0.7;
+                        updateMiniGameInfo();
+                    }
+                }
+            }
+            drawGame();
+            setTimeout(gameLoop, 20);
         }
-        // Initialize stats
-        refreshKongStats();
+
+        function drawGame() {
+            ctx.clearRect(0,0,game.w,game.h);
+            ctx.save();
+            ctx.drawImage(gorillaImg, game.gorilla.x, game.gorilla.y, game.gorilla.w, game.gorilla.h);
+            ctx.restore();
+            for(let banana of game.bananas) {
+                ctx.drawImage(bananaImg, banana.x, banana.y, banana.w, banana.h);
+            }
+            for(let moon of game.moons) {
+                ctx.drawImage(moonImg, moon.x, moon.y, moon.w, moon.h);
+            }
+        }
+
+        function collide(a, b) {
+            return !(a.x+b.w < b.x || a.x+a.w < b.x || a.x > b.x+b.w || a.y+b.h < b.y || a.y > b.y+b.h);
+        }
+
+        function gorillaControl(e) {
+            if(!game || gameOver) return;
+            if(e.key === "ArrowLeft") game.gorilla.vx = -7;
+            if(e.key === "ArrowRight") game.gorilla.vx = 7;
+        }
+        function gorillaStop(e) {
+            if(!game || gameOver) return;
+            if(e.key === "ArrowLeft" || e.key === "ArrowRight") game.gorilla.vx = 0;
+        }
     </script>
 </body>
 </html>
